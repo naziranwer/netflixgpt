@@ -1,16 +1,20 @@
 import React from "react";
 import MovieCard from "./MovieCard";
+import Shimmer from "../utils/shimmer/Shimmer";
 
 const MovieList = ({ title, movies }) => {
-  console.log("movies in movie list", movies);
   return (
     <div className="p-6 ">
-      <h1 className="text -lg md:text-3xl  py-6 text-white ">{title}</h1>
-      <div className="flex overflow-x-scroll">
+      <h1 className="text-lg md:text-3xl py-6 text-white">{title}</h1>
+      <div className="flex overflow-x-scroll scrollbar-hidden scroll-smooth">
         <div className="flex">
-          {movies?.map((movie) => (
-            <MovieCard key={movie?.id} posterPath={movie?.poster_path} />
-          ))}
+          {movies ? (
+            movies.map((movie) => (
+              <MovieCard key={movie?.id} posterPath={movie?.poster_path} />
+            ))
+          ) : (
+            <Shimmer />
+          )}
         </div>
       </div>
     </div>
@@ -18,3 +22,6 @@ const MovieList = ({ title, movies }) => {
 };
 
 export default MovieList;
+
+
+

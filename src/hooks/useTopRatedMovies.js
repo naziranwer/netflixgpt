@@ -6,7 +6,7 @@ import { useEffect } from "react";
 const useTopRatedMovies = () => {
   const dispatch = useDispatch();
   const randomNumber = Math.floor(Math.random() * 100) + 1;
-  const topRatedMovies =useSelector(store=> store.movies.topRatedMovies);
+  const topRatedMovies = useSelector((store) => store.movies.topRatedMovies);
 
   const getTopRatedMovies = async () => {
     const data = await fetch(
@@ -15,7 +15,6 @@ const useTopRatedMovies = () => {
     );
     const result = await data.json();
 
-    console.log(result.results);
     dispatch(addTopRatedMovies(result.results));
   };
 

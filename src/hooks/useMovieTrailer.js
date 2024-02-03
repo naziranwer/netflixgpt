@@ -5,7 +5,7 @@ import { API_OPTIONS } from "../utils/constants";
 
 const useMovieTrailer = (movieId) => {
   const dispatch = useDispatch();
-  const trailerVideo =useSelector(store => store.movies.trailerVideo);
+  const trailerVideo = useSelector((store) => store.movies.trailerVideo);
 
   const getMoviesVideos = async () => {
     const data = await fetch(
@@ -13,14 +13,12 @@ const useMovieTrailer = (movieId) => {
       API_OPTIONS
     );
     const json = await data.json();
-    console.log("movie videos", json.results);
 
     const filterData = json.results?.filter(
       (video) => video.type === "Trailer"
     );
     const trailer = filterData.length ? filterData[0] : json.results[0];
 
-    console.log(trailer);
     dispatch(addTrailerVideos(trailer));
   };
 

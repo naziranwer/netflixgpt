@@ -6,7 +6,7 @@ import { API_OPTIONS } from "../utils/constants";
 import { addGptMovieResult } from "../utils/gptSlice";
 
 const GptSearchBar = () => {
-  const dispatch =useDispatch();
+  const dispatch = useDispatch();
   const langKey = useSelector((store) => store.config.lang);
   const searchText = useRef(null);
 
@@ -22,75 +22,44 @@ const GptSearchBar = () => {
     return json.results;
   };
 
-  // const handleGptSearchClick = async () => {
-  //   console.log("hiiiiiiiiiiiii", searchText.current.value);
-  //   // Make an API call to GPT API
-
-  //   const gptQuery =
-  //     "Act as Movies Recommendation System and suggest some movies for the query: " +
-  //     searchText.current.value +
-  //     ". only give me names of 5 movies, comma seperated like the example results given ahead. Example result : Hera Pheri,Dhol,Dhamal,3 Idiots,Wanted ";
-  //   console.log(gptQuery);
-
-  //   const gptResults = await openai.chat.completions.create({
-  //     messages: [{ role: "user", content: gptQuery }],
-  //     model: "gpt-3.5-turbo",
-  //   });
-
-    
-  //   if (!gptResults || !gptResults.choices || gptResults.choices.length === 0) {
-  //     console.error("Error in GPT API response");
-  //     // Handle the error (e.g., show a message to the user)
-  //     window.alert("Error in GPT API");
-  //     return;
-  //   }
-  //   console.log(gptResults.choices);
-  //   const gptMovies = gptResults.choices?.[0]?.message?.content.split(",");
-
-  //   const promiseArray = gptMovies.map((movie) => searchMovieTMDB(movie));
-
-  //   const tmbdResults = await Promise.all(promiseArray);
-
-  //   console.log("tmdb results", tmbdResults);
-  //   dispatch(addGptMovieResult({movieNames:gptMovies,movieResults:tmbdResults}));
-  // };
   const handleGptSearchClick = async () => {
-    console.log("hiiiiiiiiiiiii", searchText.current.value);
-  
     const gptQuery =
       "Act as Movies Recommendation System and suggest some movies for the query: " +
       searchText.current.value +
       ". only give me names of 5 movies, comma separated like the example results given ahead. Example result : Hera Pheri,Dhol,Dhamal,3 Idiots,Wanted ";
-    console.log(gptQuery);
-  
+
     try {
       // Make an API call to GPT API
       const gptResults = await openai.chat.completions.create({
         messages: [{ role: "user", content: gptQuery }],
         model: "gpt-3.5-turbo",
       });
-  
+
       // Check if GPT API response is empty or undefined
-      if (!gptResults || !gptResults.choices || gptResults.choices.length === 0) {
+      if (
+        !gptResults ||
+        !gptResults.choices ||
+        gptResults.choices.length === 0
+      ) {
         console.error("Error in GPT API response");
         // Handle the error (e.g., show a message to the user)
         window.alert("Error in GPT API");
         return;
       }
-  
-      console.log(gptResults.choices);
+
       const gptMovies = gptResults.choices[0]?.message?.content.split(",");
-  
+
       const promiseArray = gptMovies.map((movie) => searchMovieTMDB(movie));
-  
+
       const tmdbResults = await Promise.all(promiseArray);
-  
-      console.log("tmdb results", tmdbResults);
-      dispatch(addGptMovieResult({ movieNames: gptMovies, movieResults: tmdbResults }));
+
+      dispatch(
+        addGptMovieResult({ movieNames: gptMovies, movieResults: tmdbResults })
+      );
     } catch (error) {
       // Handle API errors, including rate-limiting
       console.error("Error in GPT API:", error);
-  
+
       if (error.response && error.response.status === 429) {
         // Rate-limiting error, show a message to the user
         window.alert("API rate limit exceeded. Please try again later.");
@@ -100,7 +69,7 @@ const GptSearchBar = () => {
       }
     }
   };
-  
+
   return (
     <div
       className="pt-[35%] md:pt-[10%] flex justify-center"

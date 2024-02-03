@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import useNowPlayingMovies from "../hooks/useNowPlayingMovies";
 import MainContainer from "./MainContainer";
@@ -11,21 +11,39 @@ import { useSelector } from "react-redux";
 
 const Browse = () => {
   const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
-  console.log("gpt search from store", showGptSearch);
+  const [loading, setLoading] = useState(true);
+
   useNowPlayingMovies();
   usePopularMovies();
   useTopRatedMovies();
   useUpcomingMovies();
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+
+    // Clear the timer when the component unmounts
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div>
-      <Header />
-      {showGptSearch ? (
-        <GptSearch />
+      {loading ? (
+        <div className="fixed top-0 left-0 w-full h-full bg-black flex justify-center items-center">
+        <img src="netflixstarting.gif" alt="Loading GIF" className="max-w-full max-h-full" />
+      </div>
       ) : (
         <>
-          <MainContainer />
-          <SecondaryContainer />
+          <Header />
+          {showGptSearch ? (
+            <GptSearch />
+          ) : (
+            <>
+              <MainContainer />
+              <SecondaryContainer />
+            </>
+          )}
         </>
       )}
     </div>

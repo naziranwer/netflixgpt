@@ -9,7 +9,7 @@ const MainContainer = () => {
   if(!movies) return;
   const randomNumber = Math.floor(Math.random() * 21) ;
   const mainMovie =movies[randomNumber];
-  console.log("main movie",mainMovie);
+  
   if(!mainMovie) return;
   const {title,overview} =mainMovie;
   return (

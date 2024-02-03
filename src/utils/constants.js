@@ -26,5 +26,3 @@ export const SUPPORTED_LANGUAGES = [
 
 export const OPEN_AI_KEY=process.env.REACT_APP_OPENAI_KEY;
 
-console.log("in constat",OPEN_AI_KEY);
-console.log("tmdb key",process.env.REACT_APP_TMDB_KEY)
