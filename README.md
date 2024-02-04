@@ -1,4 +1,4 @@
-*# Netflix-GPT
+# Netflix-GPT
 
 Welcome to Netflix-GPT, a ReactJS app powered by OpenAI's GPT-3.5 for dynamic movie recommendations. This project is a fun and educational clone inspired by Netflix.
 
@@ -11,7 +11,7 @@ Welcome to Netflix-GPT, a ReactJS app powered by OpenAI's GPT-3.5 for dynamic mo
  * Firebase
 
  * Tailwind CSS
- 
+
 ## Features
 
 ### Dynamic Prompts
