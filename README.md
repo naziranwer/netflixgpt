@@ -14,20 +14,20 @@ Welcome to Netflix-GPT, a ReactJS app powered by OpenAI's GPT-3.5 for dynamic mo
 
 ## Features
 
-### Dynamic Prompts
+  ### Dynamic Prompts
 
-Discover personalized movie recommendations based on your prompts using OpenAI's GPT-3.5.
+  Discover personalized movie recommendations based on your prompts using OpenAI's GPT-3.5.
 
-### TMDB Integration
+  ### TMDB Integration
 
-Seamlessly integrate with the TMDB platform for an enhanced movie-watching experience.
+  Seamlessly integrate with the TMDB platform for an enhanced movie-watching experience.
 
-### Config-Driven UI with TMDB API
+  ### Config-Driven UI with TMDB API
 
-Explore a variety of movies using a config-driven UI powered by data from The Movie Database (TMDB) API.
+  Explore a variety of movies using a config-driven UI powered by data from The Movie Database (TMDB) API.
 
-### User-Friendly Interface
-Enjoy a clean and intuitive React app interface designed for easy exploration.
+  ### User-Friendly Interface
+  Enjoy a clean and intuitive React app interface designed for easy exploration.
 
 
 
